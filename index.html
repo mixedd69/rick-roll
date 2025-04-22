@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick Roll</title>
+    <style>
+        /* Reset margin and padding to ensure full-screen behavior */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        /* Ensure the iframe fills the screen */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;  /* 100% of the viewport width */
+            height: 100vh; /* 100% of the viewport height */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <!-- YouTube Video Embed with loop enabled -->
+    <iframe id="rickRollVideo" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=1" 
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<script>
+    // Wait for the page to fully load before attempting to play the video
+    window.onload = function() {
+        var iframe = document.getElementById('rickRollVideo');
+        var iframeSrc = iframe.src;
+
+        // Set the autoplay and muted parameters again just in case
+        iframe.src = iframeSrc + "&autoplay=1&mute=1";
+
+        // Try to play the video programmatically (may fail due to browser restrictions)
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    };
+</script>
+
+</body>
+</html>
+
